@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   has_many :sign_ins, inverse_of: :user
   
   def self.find_by_credentials(credentials)
-    user = User.find_by_email(credentials[:email])
-    user.is_password?(credentials[:password])
+    return nil unless user = User.find_by_email(credentials["email"])
+    user.is_password?(credentials["password"]) ? user : nil
   end
   
   def password=(password)

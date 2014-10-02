@@ -5,6 +5,8 @@
 </head>
 <body>
 
+<%= signed_in? ? signed_in_panel : link_to('Sign in!', new_sign_in_url) %>
+<%= flash_errors if flash[:errors] %>
 <%= yield %>
 
 </body>

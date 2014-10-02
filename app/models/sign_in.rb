@@ -1,10 +1,15 @@
 class SignIn < ActiveRecord::Base
   validates :user, :session_token, presence: true
-  validates :session_token, uniqueness: true
+  # uncomment for safety > efficiency
+  # validates :session_token, uniqueness: true 
   
   after_initialize :set_unique_session_token
   
   belongs_to :user, inverse_of: :sign_ins
+  
+  def ==(other)
+    self.session_token == other.session_token
+  end
   
   private
   def set_unique_session_token
@@ -15,6 +20,6 @@ class SignIn < ActiveRecord::Base
   end
   
   def token_unique?(token)
-    SignIn.where(session_token: token).empty?
+    SignIn.find_by_session_token(token).nil?
   end
 end

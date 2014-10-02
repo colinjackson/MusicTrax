@@ -1,0 +1,14 @@
+<form action="<%= form_action %>" method="post">
+  <%= authenticity_token %>
+  
+  <p>
+    <input type="text" name="user[email]" id="user_email">
+    <label for="user_email">Email</label>
+  </p>
+  <p>
+    <input type="password" name="user[password]" id="user_password">
+    <label for="user_password">Password</label>
+  </p>
+  
+  <input type="submit" value="PUT ME INSIDE OF YO DATABASE"></input>
+</form>
