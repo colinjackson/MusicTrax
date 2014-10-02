@@ -10,6 +10,10 @@
   { email: "smokey@bear.com", password: "forestfirez" },
   { email: "anna@molly.org", password: "incubutts" },
   { email: "london@bridge.co.uk", password: "ukbaby" }
-].each do |params|
-  User.create!(params)  
-end
+].each { |params| User.create!(params) }
+
+
+band = Band.create!(name: "Kelis")
+album = band.albums.create!(name: "The Milkshake Album")
+track1 = album.tracks.create!(name: "Milkshake")
+track2 = album.tracks.create!(name: "A General Theory of Relativity")
