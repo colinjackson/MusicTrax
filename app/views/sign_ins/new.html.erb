@@ -1,3 +1,7 @@
 <h1>Already got an account? LOG THAT THANG IN</h1>
 
 <%= render 'shared/user_form', form_action: sign_ins_url %>
+
+<% nav_links = [] %>
+<% nav_links << link_to("No account? Make one!", new_user_url) %>
+<%= navigation_footer(nav_links) %>

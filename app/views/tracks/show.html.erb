@@ -2,7 +2,7 @@
 
 <h4><%= @track.bonus_track? ? "BONUS, BABY!" : "Standard Track" %></h4>
 
-<p><%= @track.lyrics %></p>
+<p><%= ugly_lyrics(@track.lyrics) %></p>
 
 <% @track.notes.order(:created_at).each do |note| %>
   <%= render 'note', note: note %>

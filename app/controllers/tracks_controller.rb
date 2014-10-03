@@ -63,7 +63,8 @@ class TracksController < ApplicationController
     track = note.track
     
     if note.user != current_user
-        redirect_to track_url(track), status: :forbidden
+        render "YOU'RE TRYING TO BREAK SOMEONE ELSE'S STUFF!",
+          status: :forbidden
     elsif note.destroy
       redirect_to track_url(track)
     else
