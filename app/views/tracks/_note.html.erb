@@ -1,0 +1,7 @@
+<p>
+  Posted <%= note.created_at %> by <%= note.user.email %><br>
+  --<%= note.text %>
+  <% if note.user == current_user %>
+    <%= button_to "Delete!", note_url(note), method: :delete %>
+  <% end %>
+</p>

@@ -1,0 +1,8 @@
+<h1>Add An Album TO MY DATABASE</h1>
+
+<%= render 'form', form_action: albums_url, form_method: :post,
+  album: @album, submit_text: "Add Album" %>
+  
+<% nav_links = [] %>
+<% nav_links << link_to("Back to #{@album.band.name}", band_url(@album.band)) %>
+<%= navigation_footer(nav_links) %>

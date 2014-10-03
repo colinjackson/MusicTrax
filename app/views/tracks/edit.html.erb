@@ -1,0 +1,11 @@
+<h1>Edit <%= @track.name %></h1>
+
+<%= render 'form', form_action: track_url(@track), form_method: :patch,
+  track: @track, submit_text: "Save Changes" %>
+  
+  
+<% nav_links = [] %>
+<% nav_links << button_to("Destroy #{@track.name}!",
+  track_url(@track), method: :delete ) %>
+<% nav_links << link_to("Back to #{@track.name}", track_url(@track)) %>
+<%= navigation_footer(nav_links) %>

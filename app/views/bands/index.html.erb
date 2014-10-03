@@ -1,0 +1,7 @@
+<h1>Check out these BANDZ</h1>
+
+<%= list_of_model_objects(Band, :band_url) %>
+
+<% nav_links = [] %>
+<% nav_links << link_to("Add a band", new_band_url) %>
+<%= navigation_footer(nav_links) %>

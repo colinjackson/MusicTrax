@@ -1,0 +1,17 @@
+<h1><%= @track.name %></h1>
+
+<h4><%= @track.bonus_track? ? "BONUS, BABY!" : "Standard Track" %></h4>
+
+<p><%= @track.lyrics %></p>
+
+<% @track.notes.order(:created_at).each do |note| %>
+  <%= render 'note', note: note %>
+<% end %>
+
+<%= render 'note_form', track: @track %>
+
+<% nav_links = [] %>
+<% nav_links << link_to("Edit #{@track.name}", edit_track_url(@track)) %>
+<% nav_links << link_to("Back to #{@track.album.name}", 
+  album_url(@track.album)) %>
+<%= navigation_footer(nav_links) %>

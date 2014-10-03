@@ -1,0 +1,8 @@
+<h1>Add A Band TO MY DATABASE</h1>
+
+<%= render 'form', form_action: bands_url, form_method: :post,
+  band: @band, submit_text: "Add Band" %>
+  
+<% nav_links = [] %>
+<% nav_links << link_to("Back to BANDZ", bands_url) %>
+<%= navigation_footer(nav_links) %>

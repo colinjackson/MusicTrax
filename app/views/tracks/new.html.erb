@@ -1,0 +1,9 @@
+<h1>Add a chrack</h1>
+
+<%= render 'form', form_action: tracks_url, form_method: :post,
+  track: @track, submit_text: "Add track" %>
+  
+<% nav_links = [] %>
+<% nav_links << link_to("Back to #{@track.album.name}", 
+  album_url(@track.album)) %>
+<%= navigation_footer(nav_links) %>

@@ -1,0 +1,10 @@
+<h1>Edit <%= @band.name %></h1>
+
+<%= render 'form', form_action: band_url(@band), form_method: :patch,
+  band: @band, submit_text: "Save Changes" %>
+
+<% nav_links = [] %>
+<% nav_links << button_to("Destroy #{@band.name}!",
+  band_url(@band), method: :delete ) %>
+<% nav_links << link_to("Back to #{@band.name}", band_url(@band)) %>
+<%= navigation_footer(nav_links) %>

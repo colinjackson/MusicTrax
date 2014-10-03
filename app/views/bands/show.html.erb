@@ -1,0 +1,9 @@
+<h1><%= @band.name %></h1>
+
+<%= list_of_model_objects(@band.albums, :album_url) %>
+
+<% nav_links = [] %>
+<% nav_links << link_to("New album", new_album_url(@band)) %>
+<% nav_links << link_to("Edit #{@band.name}", edit_band_url(@band)) %>
+<% nav_links << link_to("Back to BANDZ", bands_url) %>
+<%= navigation_footer(nav_links) %>

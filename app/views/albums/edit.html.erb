@@ -1,0 +1,10 @@
+<h1>Edit <%= @album.name %></h1>
+
+<%= render 'form', form_action: album_url(@album), form_method: :patch,
+  album: @album, submit_text: "Save Changes" %>
+  
+<% nav_links = [] %>
+<% nav_links << link_to("Back to #{@album.name}", album_url(@album)) %>
+<% nav_links << button_to("Destroy #{@album.name}!",
+  album_url(@album), method: :delete ) %>
+<%= navigation_footer(nav_links) %>

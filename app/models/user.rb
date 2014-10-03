@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   
   has_many :sign_ins, inverse_of: :user
+  has_many :notes, inverse_of: :user, dependent: :destroy
   
   def self.find_by_credentials(credentials)
     return nil unless user = User.find_by_email(credentials["email"])

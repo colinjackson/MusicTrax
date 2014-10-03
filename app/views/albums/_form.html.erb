@@ -1,0 +1,32 @@
+<form action="<%= form_action %>" method="post">
+  <%= authenticity_token %>
+  <%= patch_method if form_method == :patch %>
+  
+  <p><%= resource_name("album", album.name) %></p>
+  
+  <p>
+    <select name="band[id]" id="band_id">
+      <% Band.order(:name).each do |band| %>
+      <option value="<%= band.id %>"
+        <%= "selected=true" if band == album.band %>>
+        <%= band.name %>
+      </option>
+      <% end %>
+    </select>
+    <label for="band_id">Band</label>
+  </p>
+  
+  <p>
+    <label for="album_live_album">Live Album?</label><br>
+    <% [true, false].each do |bool| %>
+      <% live = bool ? "yes" : "no" %>
+      <label for="album_live_album_<%= live %>"><%= live %></label>
+      <input type="radio" name="album[live_album]" value="<%= bool.to_s %>"
+        <%= "checked=true" if bool == album.live_album %>>
+    <% end %>
+  </p>
+  
+  <p>
+    <input type="submit" value="<%= submit_text %>">
+  </p>
+</form>
