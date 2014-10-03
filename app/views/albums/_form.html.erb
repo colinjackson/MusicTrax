@@ -5,7 +5,7 @@
   <p><%= resource_name("album", album.name) %></p>
   
   <p>
-    <select name="band[id]" id="band_id">
+    <select name="album[band_id]" id="album_band_id">
       <% Band.order(:name).each do |band| %>
       <option value="<%= band.id %>"
         <%= "selected=true" if band == album.band %>>
@@ -13,7 +13,7 @@
       </option>
       <% end %>
     </select>
-    <label for="band_id">Band</label>
+    <label for="album_band_id">Band</label>
   </p>
   
   <p>

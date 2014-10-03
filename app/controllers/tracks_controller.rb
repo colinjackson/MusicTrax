@@ -7,7 +7,7 @@ class TracksController < ApplicationController
   end
   
   def create
-    album = Album.find(params[:album][:id])
+    album = Album.find(params[:track][:album_id])
     @track = album.tracks.new(track_params)
     
     if album.save
@@ -82,7 +82,7 @@ class TracksController < ApplicationController
       params[:track][:bonus_track] = false
     end
     
-    params.require(:track).permit(:name, :bonus_track, :lyrics)
+    params.require(:track).permit(:name, :bonus_track, :lyrics, :album_id)
   end
   
   def note_params

@@ -4,7 +4,6 @@ class SignInsController < ApplicationController
   end
   
   def create
-    p user_params
     user = User.find_by_credentials(user_params)
     if user
       sign_in_user(user)

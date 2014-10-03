@@ -7,7 +7,7 @@ class AlbumsController < ApplicationController
   end
   
   def create
-    band = Band.find(params[:band][:id])
+    band = Band.find(params[:album][:band_id])
     @album = band.albums.new(album_params)
     
     if band.save
@@ -57,6 +57,6 @@ class AlbumsController < ApplicationController
       params[:album][:live_album] = false
     end
     
-    params.require(:album).permit(:name, :live_album)
+    params.require(:album).permit(:name, :live_album, :band_id)
   end
 end

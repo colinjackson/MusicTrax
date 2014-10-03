@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :activated, inclusion: { in: [true, false] }
   validates :activation_token, uniqueness: { allow_nil: true }
   
-  after_initialize :set_activated_to_false, :set_unique_activation_token
+  after_initialize :ensure_activation, :set_unique_activation_token
   
   has_many :sign_ins, inverse_of: :user
   has_many :notes, inverse_of: :user, dependent: :destroy
@@ -27,9 +27,13 @@ class User < ActiveRecord::Base
     self.activated
   end
   
+  def activation_url
+    "#{}"
+  end
+  
   private
-  def set_activated_to_false
-    self.activated = false
+  def ensure_activation
+    self.activated ||= false
   end
   
   def set_unique_activation_token

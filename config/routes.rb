@@ -15,4 +15,6 @@ MusicTrax::Application.routes.draw do
   
   post '/notes' => 'tracks#create_note'
   delete '/notes/:id' => 'tracks#destroy_note', as: 'note'
+  
+  root to: 'sign_ins#new'
 end
