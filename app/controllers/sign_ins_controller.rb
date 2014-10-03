@@ -7,7 +7,7 @@ class SignInsController < ApplicationController
     p user_params
     user = User.find_by_credentials(user_params)
     if user
-      sign_in_user!(user)
+      sign_in_user(user)
       redirect_to user_url(user)
     else
       flash.now[:errors] = ["Bad user_name/password combo!"]

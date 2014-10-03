@@ -6,9 +6,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :current_sign_in, :signed_in?
   
   private
-  def sign_in_user!(user)
-     @current_sign_in = user.sign_ins.create!
-     session[:token] = @current_sign_in.session_token
+  def sign_in_user(user)
+    return false if !user.activated
+    
+    @current_sign_in = user.sign_ins.create!
+    session[:token] = @current_sign_in.session_token
+    true
   end
   
   def current_user
