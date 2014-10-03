@@ -56,6 +56,8 @@ module ApplicationHelper
   end
   
   def navigation_footer(links)
+    return nil if links.empty?
+    
     <<-HTML.html_safe
       <h3>Navigate!</h3>
       <ul>

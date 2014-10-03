@@ -4,4 +4,7 @@
   Email: <%= current_user.email %>
 </p>
 
-<p><%= link_to "Check out these BANDZ", bands_url %></p>
+<% nav_links = [] %>
+<% nav_links << link_to("Check out these BANDZ", bands_url) %>
+<% nav_links << link_to("See the matrix", users_url) if current_user.admin? %>
+<%= navigation_footer(nav_links) %>

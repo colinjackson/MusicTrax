@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<table>
+  <tr>
+    <th>email</th>
+    <th>admin</th>
+    <th>delete</th>
+  </tr>
+  <% User.order(:email).each do |user| %>
+    <tr>
+      <% next if user == current_user %>
+      
+      <td><%= user.email %></td>
+      
+      <% button_text = user.admin? ? "remove admin" : "make admin" %>
+      <td><%= button_to button_text, 
+        toggle_admin_user_url(user), method: :patch %></td>
+      
+      <td><%= button_to "delete", user_url(user), method: :delete %></td>
+    <tr>
+  <% end %>
+</table>

@@ -1,5 +1,7 @@
 class TracksController < ApplicationController
   before_filter :ensure_signed_in
+  before_filter :ensure_admin, only: [:new, :create, :edit, :update, :destroy]
+  
   
   def new
     @track = Album.find(params[:id]).tracks.new

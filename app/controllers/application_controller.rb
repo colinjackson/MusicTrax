@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
   def ensure_signed_out
     redirect_to new_sign_in_url if signed_in?
   end
+  
+  def ensure_admin
+    redirect_to new_sign_in_url unless current_user && current_user.admin?
+  end
 end

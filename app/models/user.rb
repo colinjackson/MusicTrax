@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   validates :email, :password_digest, presence: true
   validates :email, uniqueness: true
-  validates :activated, inclusion: { in: [true, false] }
+  validates :activated, :admin, inclusion: { in: [true, false] }
   validates :activation_token, uniqueness: { allow_nil: true }
   
   after_initialize :ensure_activation, :set_unique_activation_token
@@ -16,7 +16,12 @@ class User < ActiveRecord::Base
   
   def self.activate_with_token(token)
     user = User.find_by_activation_token(token)
-    user ? user.toggle(:activated) : nil
+    unless !user
+      user.activated = true
+      user.activation_token = nil
+    end
+    
+    user
   end
   
   def password=(password)
@@ -25,6 +30,10 @@ class User < ActiveRecord::Base
   
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
+  
+  def admin?
+    self.admin
   end
   
   private

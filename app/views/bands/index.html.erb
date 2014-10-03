@@ -3,5 +3,5 @@
 <%= list_of_model_objects(Band, :band_url) %>
 
 <% nav_links = [] %>
-<% nav_links << link_to("Add a band", new_band_url) %>
+<% nav_links << link_to("Add a band", new_band_url) if current_user.admin? %>
 <%= navigation_footer(nav_links) %>

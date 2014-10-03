@@ -6,5 +6,5 @@
 <% nav_links = [] %>
 <% nav_links << link_to("Back to #{@album.name}", album_url(@album)) %>
 <% nav_links << button_to("Destroy #{@album.name}!",
-  album_url(@album), method: :delete ) %>
+  album_url(@album), method: :delete ) if current_user.admin? %>
 <%= navigation_footer(nav_links) %>

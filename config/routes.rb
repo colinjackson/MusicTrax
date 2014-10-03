@@ -1,9 +1,12 @@
 MusicTrax::Application.routes.draw do
   resources :sign_ins, only: [:new, :create, :destroy]
   
-  resources :users, only: [:new, :create, :show] do
+  resources :users, only: [:index, :new, :create, :show, :destroy] do
     collection do
       get 'activations' => 'users#activate'
+    end
+    member do
+      patch 'toggle_admin' => 'users#toggle_admin'
     end
   end
   

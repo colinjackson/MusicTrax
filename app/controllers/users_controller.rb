@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_filter :ensure_signed_in, only: :show
   before_filter :ensure_signed_out, only: [:new, :create]
+  before_filter :ensure_admin, only: [:index, :destroy, :toggle_admin]
+  
+  def index
+    render :index
+  end
   
   def new
     render :new
@@ -22,6 +27,16 @@ class UsersController < ApplicationController
     render :show
   end
   
+  def destroy
+    user = User.find(params[:id])
+    if user.destroy
+      redirect_to users_url
+    else
+      flash[:errors] = band.errors.full_messages
+      redirect_to users_url
+    end
+  end
+  
   def activate
     user = User.activate_with_token(params[:activation_token])
     if user.nil?
@@ -33,6 +48,17 @@ class UsersController < ApplicationController
     else
       flash[:errors] = user.errors.full_messsages
       redirect_to new_sign_in_url
+    end
+  end
+  
+  def toggle_admin
+    user = User.find(params[:id])
+    user.toggle(:admin)
+    if user.save
+      redirect_to users_url
+    else
+      flash[:errors] = user.errors.full_messages
+      redirect_to users_url
     end
   end
   
