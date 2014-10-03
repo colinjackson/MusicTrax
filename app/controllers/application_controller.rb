@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   
   private
   def sign_in_user(user)
-    puts "USER ACTIVATED? #{user.activated}"
     return false if !user.activated
     
     @current_sign_in = user.sign_ins.create!

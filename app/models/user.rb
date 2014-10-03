@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
     user.is_password?(credentials["password"]) ? user : nil
   end
   
+  def self.activate_with_token(token)
+    user = User.find_by_activation_token(token)
+    user ? user.toggle(:activated) : nil
+  end
+  
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
   end
@@ -22,18 +27,11 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
   
-  def activate_with_token(token)
-    self.activated = true if self.activation_token == token
-    self.activated
-  end
-  
-  def activation_url
-    "#{}"
-  end
-  
   private
   def ensure_activation
-    self.activated ||= false
+    unless self.activated
+      self.activated = false
+    end
   end
   
   def set_unique_activation_token
